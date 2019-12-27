@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue.js Carousel</title>
+  <script src="https://vuejs.org/js/vue.js"></script>
+
+  <style>
+    .carousel {
+      width: 600px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .carousel-items {
+      position: relative;
+      display: block;
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      border: 5px solid #ccc;
+    }
+
+    .carousel-items div {
+      box-sizing: border-box;
+      width: 600px;
+      height: 400px;
+      top: 0;
+      left: 0;
+      position: absolute;
+      transition: all .9s ease;
+    }
+
+    .slide-leave-active,
+    .slide-enter-active {
+      transition: 1s;
+    }
+
+    .slide-enter {
+      transform: translateX(100%);
+    }
+
+    .slide-leave-to {
+      transform: translateX(-100%);
+    }
+
+    .carousel-dots {
+      padding: 5px;
+      width: 600px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .carousel-dots>div {
+      cursor: pointer;
+      display: inline-block;
+      width: 30px;
+      height: 10px;
+      margin-right: 10px;
+      background-color: #000;
+    }
+
+    .carousel-dots>.active {
+      background-color: #f00;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="app" class="carousel">
+    <!-- vue template here -->
+    <div class="carousel-items">
+      <div><img src="https://i.picsum.photos/id/237/600/400.jpg" alt="img01"></div>
+      <div><img src="https://i.picsum.photos/id/217/600/400.jpg" alt="img02"></div>
+      <div><img src="https://i.picsum.photos/id/168/600/400.jpg" alt="img03"></div>
+      <div><img src="https://i.picsum.photos/id/111/600/400.jpg" alt="img04"></div>
+      <div><img src="https://i.picsum.photos/id/163/600/400.jpg" alt="img05"></div>
+      <div><img src="https://i.picsum.photos/id/178/600/400.jpg" alt="img06"></div>
+      <div><img src="https://i.picsum.photos/id/144/600/400.jpg" alt="img07"></div>
+      <div><img src="https://i.picsum.photos/id/198/600/400.jpg" alt="img08"></div>
+      <div><img src="https://i.picsum.photos/id/186/600/400.jpg" alt="img09"></div>
+      <div><img src="https://i.picsum.photos/id/176/600/400.jpg" alt="img10"></div>
+      <div><img src="https://i.picsum.photos/id/103/600/400.jpg" alt="img11"></div>
+    </div>
+
+    <div class="carousel-dots"></div>
+
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        imgList: []
+      },
+      methods: {
+        setPhoto(targetIdx) {
+
+        },
+        startCarousel() {
+
+        }
+      },
+
+    })
+  </script>
+
+</body>
+
+</html>

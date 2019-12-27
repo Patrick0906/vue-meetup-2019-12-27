@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>carousel demo</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+  <style>
+    .carousel {
+      width: 600px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .carousel-items {
+      position: relative;
+      display: block;
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      border: 5px solid #ccc;
+    }
+
+    .carousel-items div {
+      box-sizing: border-box;
+      display: none;
+      width: 600px;
+      height: 400px;
+      top: 0;
+      left: 0;
+    }
+
+    .carousel-items .active {
+      display: block;
+      position: absolute;
+      transition: all .9s ease;
+    }
+
+    .carousel-items .active-enter {
+      transform: translateX(100%);
+    }
+
+    .carousel-items .active-leave {
+      transform: translateX(-100%);
+    }
+
+    .carousel-dots {
+      padding: 5px;
+      width: 600px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .carousel-dots>div {
+      cursor: pointer;
+      display: inline-block;
+      width: 30px;
+      height: 10px;
+      margin-right: 10px;
+      background-color: #000;
+    }
+
+    .carousel-dots>.active {
+      background-color: #f00;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="carousel">
+
+    <div class="carousel-items">
+      <div><img src="https://i.picsum.photos/id/237/600/400.jpg" alt="img01"></div>
+      <div><img src="https://i.picsum.photos/id/217/600/400.jpg" alt="img02"></div>
+      <div><img src="https://i.picsum.photos/id/168/600/400.jpg" alt="img03"></div>
+      <div><img src="https://i.picsum.photos/id/111/600/400.jpg" alt="img04"></div>
+      <div><img src="https://i.picsum.photos/id/163/600/400.jpg" alt="img05"></div>
+      <div><img src="https://i.picsum.photos/id/178/600/400.jpg" alt="img06"></div>
+      <div><img src="https://i.picsum.photos/id/144/600/400.jpg" alt="img07"></div>
+      <div><img src="https://i.picsum.photos/id/198/600/400.jpg" alt="img08"></div>
+      <div><img src="https://i.picsum.photos/id/186/600/400.jpg" alt="img09"></div>
+      <div><img src="https://i.picsum.photos/id/176/600/400.jpg" alt="img10"></div>
+      <div><img src="https://i.picsum.photos/id/103/600/400.jpg" alt="img11"></div>
+    </div>
+
+    <div class="carousel-dots"></div>
+
+  </div>
+
+
+  <script>
+    $(function () {
+      let intervalId = 0;
+      const timer = 3500;
+
+      const setPhoto = (targetIdx) => {
+
+        const currentImg = $('.active');
+
+        // 先判斷有無帶參數 targetIdx, 若有則將 targetIdx 當作下一張的 index
+        // 若無，則預設為目前的下一張
+        const nextImg = (targetIdx !== undefined) ?
+          $('.carousel-items div').eq(targetIdx) :
+          (currentImg.next().length) ? currentImg.next() : $('.carousel-items div').first();
+
+        targetIdx = targetIdx || nextImg.index();
+
+        $('.carousel-dots .active').removeClass('active');
+        $('.carousel-dots div').eq(targetIdx).addClass('active');
+
+        // 下一張預備位置
+        nextImg.addClass('active active-enter');
+
+        // 開始動畫
+        window.setTimeout(function () {
+          currentImg.addClass('active-leave')
+          nextImg.removeClass('active-enter');
+        }, 0);
+
+        // 結束後隱藏
+        window.setTimeout(function () {
+          currentImg.attr('class', '');
+        }, 1000);
+
+        if (intervalId === 0) {
+          intervalId = window.setInterval(setPhoto, timer);
+        }
+      };
+
+      for (let i = 0; i < $('.carousel-items div').length; i++) {
+        let div = $('<div />', {
+          click: function (e) {
+            window.clearTimeout(intervalId);
+            intervalId = 0;
+            setPhoto($(this).index())
+          }
+        }).appendTo('.carousel-dots');
+      }
+
+      $('.carousel-items div').first().addClass('active');
+      $('.carousel-dots div').first().addClass('active');
+
+      intervalId = window.setInterval(setPhoto, timer);
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>v-on</title>
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <style>
+    .red {
+      background-color: #f00;
+    }
+
+    .blue {
+      background-color: #00f;
+    }
+
+    .block {
+      width: 300px;
+      height: 300px;
+      border: 2px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- vue template here -->
+    <div class="block" :class="blockClass"></div>
+
+    <button>Red</button>
+    <button>Blue</button>
+
+  </div>
+
+
+  <script>
+    // code here
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        blockClass: ''
+      }
+    })
+  </script>
+
+</body>
+
+</html>
